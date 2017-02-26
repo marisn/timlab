@@ -1,0 +1,4 @@
+*.zargo~
+*.pyc
+src/*/migrations
+
