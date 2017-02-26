@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from django.views.generic.list import ListView
 
-# Create your views here.
+from projects.models import Project
+
+
+class ProjectsListView(ListView):
+    model = Project
+    order = ('is_active', 'created')
