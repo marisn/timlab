@@ -21,7 +21,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gnr+-2s=6_)a+i7g-l*1nluvg7_tfw8k4=7m2%m!)emp0*(l*l'
+try:
+    SECRET_KEY = open(os.path.join(BASE_DIR, 'timlab', 'secret_key')).read().strip()
+except IOError:
+    import random
+    import string
+    
+    SECRET_KEY = "".join([random.SystemRandom().choice(string.digits + string.letters + string.punctuation) for i in range(100)])
+    print SECRET_KEY
+    f = open(os.path.join(BASE_DIR, 'timlab', 'secret_key'), 'w')
+    f.write(SECRET_KEY)
+    f.close()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'projects',
+    'images',
 ]
 
 MIDDLEWARE = [
