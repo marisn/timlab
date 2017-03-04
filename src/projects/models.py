@@ -11,7 +11,8 @@ class Project(models.Model):
     Image labeling project
     """
     
-    slug = models.SlugField(unique=True, help_text="Will be provided automaticly if left blank.")
+    slug = models.SlugField(unique=True, blank=True,
+        help_text="Will be provided automaticly if left blank.")
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True,
         help_text="Can contain HTML. Will be placed inside a DIV element.")
