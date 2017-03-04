@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block nav-menu %}<li class="acitve"><a href="/p/{{ object.slug }}/">{{ object.title }}</a></li>{% endblock %}
+
+{% block content %}
+<h1>{{ object.title }} <span class="label label-{{ object.is_active|yesno:'success,default' }}">{{ object.is_active|yesno:'Active,Inactive' }}</span></h1>
+<small>Created on {{ object.created }}</small>
+<p>{{ object.description|safe }}</p>
+{% endblock %}

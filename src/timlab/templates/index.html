@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Training image labeling site{% endblock %}
+{% block title %}Welcome{% endblock %}
+
+{% block welcome_class %}active{% endblock %}
 
 {% block content %}
-<a href="/p/">List of available projects</a>
+<div class="col-sm-6">
+    <div class="jumbotron">
+        <h1>Why Timlab?</h1>
+        <p>What is Timlab?</p>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">What's next?</div>
+        <div class="panel-body">
+            <p>Where to go from here: <a href="/p/">List of available projects</a></p>
+        </div>
+    </div>
+</div>
 {% endblock %}

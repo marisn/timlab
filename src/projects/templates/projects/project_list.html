@@ -1,9 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}List of active projects{% endblock %}
+{% block title %}List of projects{% endblock %}
+
+{% block project_list_class %}active{% endblock %}
 
 {% block content %}
-<h1>Active projects</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">Active projects</div>
+    <div class="panel-body">
+        <dl>
+        {% for project in object_list %}
+            {% if project.is_active %}
+            <dt><a href="/p/{{ project.slug }}/">{{ project.title }}</a></dt>
+            <dd>{{ project.description|safe }}</dd>
+            {% endif %}
+        {% empty %}
+            <dt>There are no active projects</dt>
+        {% endfor %}
+        </dl>
+    </div>
+</div>
 
-<h1>Inactive projects</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">Inactive projects</div>
+    <div class="panel-body">
+        <dl>
+        {% for project in object_list %}
+            {% if not project.is_active %}
+            <dt><a href="/p/{{ project.slug }}/">{{ project.title }}</a></dt>
+            <dd>{{ project.description|safe }}</dd>
+            {% endif %}
+        {% empty %}
+            <dt>There are no inactive projects</dt>
+        {% endfor %}
+        </dl>
+    </div>
+</div>
 {% endblock %}
