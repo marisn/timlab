@@ -3,3 +3,5 @@
 src/*/migrations
 src/timlab/secret_key
 src/db.sqlite3
+src/media/*
+
