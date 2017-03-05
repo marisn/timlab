@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-# Register your models here.
+from images.models import Image, ImageLabel
+
+admin.site.register(Image)
+admin.site.register(ImageLabel)

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Label this image{% endblock %}
+
+{% block nav-menu %}<li><a href="/p/{{ object.project.slug }}/">{{ object.project.title }}</a></li>
+<li>{% if object.view.next_unlabeled %}<a href="/p/{{ object.project.slug }}/image/{{ object.view.next_unlabeled }}/">Image</a>{% else %}No images{% endif %}</li>{% endblock %}
+
+{% block content %}
+{{ form.as_p }}
+{% endblock %}
