@@ -19,18 +19,22 @@
         <style type="text/css">
             body { padding-top: 70px; }
         </style>
+        {% block header %}{% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <p class="navbar-brand">Timlab</p>
+                    <img class="navbar-brand" src="/static/logo.png" alt="TImLab logo">
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="{% block welcome_class %}{% endblock %}"><a href="/">Welcome</a></li>
                         <li class="{% block project_list_class %}{% endblock %}"><a href="/p/">Projects</a></li>
                         {% block nav-menu %}{% endblock %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/admin/">Admin</a></li>
                     </ul>
                 </div>
             </div>
