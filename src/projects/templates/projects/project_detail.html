@@ -2,13 +2,45 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 
+{% block header %}
+<style type="text/css">
+    .tip-content {
+        display: none;
+    }
+    .list-group-item:hover .tip-content {
+        display: inline;
+    }
+</style>
+{% endblock %}
+
 {% block nav-menu %}<li class="active"><a href="/p/{{ object.slug }}/">{{ object.title }}</a></li>{% endblock %}
 
 {% block content %}
 <h1>{{ object.title }} <span class="label label-{{ object.is_active|yesno:'success,default' }}">{{ object.is_active|yesno:'Active,Inactive' }}</span></h1>
 <small>Created on {{ object.created }}</small>
-<p>{{ object.description|safe }}</p>
-{% if object.view.get_unlabeled %}
-<a href="{{ object.view.get_unlabeled }}" class="btn btn-primary btn-lg" role="button">Assign class to image</a>
+<p class="well">{{ object.description|safe }}</p>
+{% if user.is_authenticated %}
+{% if not view.get_usersproject %}
+<form action="{% url 'join-project' object.slug %}" method="post">
+    {% csrf_token %}
+    <div class="alert alert-info">You must join this project to start labeling images:
+    <button class="btn btn-primary" type="submit">Join this project</button></div>
+</form>
 {% endif %}
+{% if view.get_unlabeled %}
+<div class="alert alert-info"><a href="{{ view.get_unlabeled }}" class="btn btn-primary btn" role="button">Label images</a></div>
+{% endif %}
+{% else %}
+    <p class="bg-info">You must log in to participate.</p>
+{% endif %}
+<div>
+    <ul class="list-group">In this project you will be asked to classify small pictures into one of following classes:
+        {% for k in project.label_set.all %}
+        <li class="list-group-item">{{ k.text }}{% if k.code %} ({{ k.code }}){% endif %}
+            <span class="tip-content">– {{ k.description|safe }}</span></li>
+        {% empty %}
+        <li class="list-group-item bg-info">No labeling classes have been defined</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

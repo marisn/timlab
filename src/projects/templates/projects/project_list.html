@@ -5,35 +5,18 @@
 {% block project_list_class %}active{% endblock %}
 
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-heading">Active projects</div>
-    <div class="panel-body">
-        <dl>
-        {% for project in object_list %}
-            {% if project.is_active %}
-            <dt><a href="/p/{{ project.slug }}/">{{ project.title }}</a></dt>
-            <dd>{{ project.description|safe }}</dd>
-            {% endif %}
-        {% empty %}
-            <dt>There are no active projects</dt>
-        {% endfor %}
-        </dl>
+<div class="container-fluid">
+    {% for project in object_list %}
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="h3"><a href="/p/{{ project.slug }}/">{{ project.title }}</a></span> <span class="label label-{{ project.is_active|yesno:'success,default' }}">{{ project.is_active|yesno:'Active,Inactive' }}</span></div>
+            <div class="panel-body">
+                <p>{{ project.description|safe }}</p>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">Inactive projects</div>
-    <div class="panel-body">
-        <dl>
-        {% for project in object_list %}
-            {% if not project.is_active %}
-            <dt><a href="/p/{{ project.slug }}/">{{ project.title }}</a></dt>
-            <dd>{{ project.description|safe }}</dd>
-            {% endif %}
-        {% empty %}
-            <dt>There are no inactive projects</dt>
-        {% endfor %}
-        </dl>
-    </div>
+    {% empty %}
+    <p class="bg-info">There are no projects defined yet.</p>
+    {% endfor %}
 </div>
 {% endblock %}

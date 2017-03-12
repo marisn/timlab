@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from projects.models import Project, Label
+from projects.models import Project, Label, UsersProject
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -16,3 +16,4 @@ class LabelAdmin(admin.ModelAdmin):
 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Label, LabelAdmin)
+admin.site.register(UsersProject)

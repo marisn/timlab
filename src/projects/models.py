@@ -64,7 +64,7 @@ class Label(models.Model):
             return "%s (%s - %s)" % (self.text, self.code, self.project.title)
         return "%s (%s)" % (self.text, self.project.title)
 
-
+@python_2_unicode_compatible
 class UsersProject(models.Model):
     """
     Links Users with Projects
@@ -75,3 +75,6 @@ class UsersProject(models.Model):
     user = models.ForeignKey(User)
     project = models.ForeignKey(Project)
     joined = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return "%s - %s" % (self.user.username, self.project.title)

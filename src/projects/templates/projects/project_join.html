@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Join {{ project.title }}{% endblock %}
+
+{% block nav-menu %}<li class="active"><a href="/p/{{ project.slug }}/">{{ project.title }}</a></li>{% endblock %}
+
+{% block content %}
+<h1>Join {{ project.title }}</h1>
+<p class="alert alert-info">{{ message }}</p>
+{% if first_img %}
+<div class="alert alert-success">
+    <a href="{{ first_img }}" class="btn btn-primary btn" role="button">Start labeling</a>
+</div>
+{% endif %}
+{% endblock %}
