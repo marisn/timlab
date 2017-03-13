@@ -28,7 +28,7 @@ class ProjectDetailView(DetailView):
         if not self.request.user:
             return None
         
-        im_pk = ImageLabel.objects.filter(user=self.request.user, label__isnull=False).first()
+        im_pk = ImageLabel.objects.filter(user=self.request.user, label__isnull=True).values_list('id', flat=True).first()
         if im_pk:
             return '/p/%s/image/%s/' % (self.object.slug, im_pk)
         else:
