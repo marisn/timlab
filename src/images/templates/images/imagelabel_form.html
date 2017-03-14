@@ -3,8 +3,30 @@
 {% block title %}Label this image{% endblock %}
 
 {% block nav-menu %}<li><a href="/p/{{ object.project.slug }}/">{{ object.project.title }}</a></li>
-<li>{% if object.view.next_unlabeled %}<a href="/p/{{ object.project.slug }}/image/{{ object.view.next_unlabeled }}/">Image</a>{% else %}No images{% endif %}</li>{% endblock %}
+<li>{% if view.next_unlabeled %}<a href="/p/{{ object.project.slug }}/image/{{ view.next_unlabeled.pk }}/">Image</a>{% else %}<a href="#">No images</a>{% endif %}</li>{% endblock %}
 
 {% block content %}
-{{ form.as_p }}
+<div class="container">
+    <div class="col-md-4">
+        <img src="/{{ object.image.filename }}" alt="Image to label">
+    </div>
+    <div class="col-md-8">
+    <form action="" method="post">
+        {% csrf_token %}
+        <ul class="list-group">
+        {% for label in labels %}
+            <li class="list-group-item">
+                <label>
+                    <input type="radio" name="label" value="{{ label.pk }}">
+                    {{ label.text }}
+                </label>
+                <div class="col-md-10 pull-right tip-content">{{ label.description|safe }}</div>
+            </li>
+        {% endfor %}
+        </ul>
+        <button type="submit" class="btn btn-primary btn">Save and load next</button>&nbsp;&nbsp;&nbsp;
+        <a href="/p/{{ object.project.slug }}/image/{{ view.next_unlabeled.pk }}" class="btn btn-default btn" role="button">Skip</a>
+    </form>
+    </div>
+</div>
 {% endblock %}

@@ -9,19 +9,23 @@ from django.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):
+    """
+    Usage example:
+    ./manage.py crop_random 4 256 0.5 /home/user/images ./media/project1/
+    """
     help = "Crops N random images from each of image files"
     
     def add_arguments(self, parser):
         parser.add_argument('count', type=int,
             help="Number of samples to cut out from a single file")
-        parser.add_argument('size', type=int, default=64,
-            help="Size of sampled image (defaults to 64)")
+        parser.add_argument('size', type=int, default=256,
+            help="Size of sampled image (defaults to 256)")
         parser.add_argument('ratio', type=float, default=1.0,
             help="Shrink image by ratio before cropping a sample (defaults to 1 = no shrink")
         parser.add_argument('source', type=str,
             help="Path to folder containing images to crop")
         parser.add_argument('target', type=str,
-            help="Path where to store result (i.e. /path/to/MEDIA_ROOT/project_slug/)")
+            help="Path where to store result (i.e. ./MEDIA_ROOT/project_slug/)")
     
     def handle(self, *args, **options):
         if not options['count'] > 0:

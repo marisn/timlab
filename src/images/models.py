@@ -29,6 +29,7 @@ class ImageLabel(models.Model):
     
     image = models.ForeignKey(Image)
     user = models.ForeignKey(User)
+    project = models.ForeignKey(Project)
     # Labels are added later
     label = models.ForeignKey(Label, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)

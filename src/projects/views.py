@@ -68,7 +68,7 @@ class JoinProjectView(LoginRequiredMixin, TemplateView):
         # Choose random images from all available
         im_ids = sample(xrange(len(im_set)), project.train_count)
         for i in im_ids:
-            il = ImageLabel(image=im_set[i], user=self.request.user)
+            il = ImageLabel(image=im_set[i], user=self.request.user, project=project)
             il.save()
         
         return render(request, self.template_name, {

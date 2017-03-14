@@ -9,6 +9,11 @@ from images.models import Image
 
 
 class Command(BaseCommand):
+    """
+    Usage example:
+    ./manage.py import_images 2 media/project2/
+    """
+    
     help = "Populates projects file list with images from a folder"
     
     def add_arguments(self, parser):

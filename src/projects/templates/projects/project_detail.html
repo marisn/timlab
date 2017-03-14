@@ -2,17 +2,6 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 
-{% block header %}
-<style type="text/css">
-    .tip-content {
-        display: none;
-    }
-    .list-group-item:hover .tip-content {
-        display: inline;
-    }
-</style>
-{% endblock %}
-
 {% block nav-menu %}<li class="active"><a href="/p/{{ object.slug }}/">{{ object.title }}</a></li>{% endblock %}
 
 {% block content %}
