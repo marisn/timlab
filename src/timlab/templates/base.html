@@ -41,6 +41,12 @@
                         {% block nav-menu %}{% endblock %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                        <li><a href="#">{{ user.get_full_name }} ({{ user.get_username }})</a></li>
+                        <li><a href="/logout/">Logout</a></li>
+                        {% else %}
+                        <li><a href="/login/">Login</a></li>
+                        {% endif %}
                         <li><a href="/admin/">Admin</a></li>
                     </ul>
                 </div>
