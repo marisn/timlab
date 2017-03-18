@@ -4,6 +4,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.html import format_html
 
 from projects.models import Label, Project
 
@@ -20,6 +21,9 @@ class Image(models.Model):
     
     def __str__(self):
         return '%s (%s)' % (self.filename, self.project.slug)
+    
+    def preview(self):
+        return format_html('<img src="/{}">', self.filename)
 
 
 class ImageLabel(models.Model):
@@ -36,3 +40,6 @@ class ImageLabel(models.Model):
     
     def get_absolute_url(self):
         return '/p/%s/image/%s' % (self.project.slug, self.pk)
+    
+    def __str__(self):
+        return "%s - %s" % (self.user.username, self.image.filename)

@@ -35,5 +35,6 @@ class Command(BaseCommand):
             match.extend(fnmatch.filter(files, '*.[Tt][Ii][Ff][Ff]'))
             
             for m in match:
+                # FIXME: filename should be relative to settings.MEDIA_ROOT
                 im = Image(filename=os.path.join(path, m), project=project)
                 im.save()
