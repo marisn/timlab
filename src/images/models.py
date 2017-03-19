@@ -6,7 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.html import format_html
 
-from projects.models import Label, Project
+from projects.models import Label, Project, UsersProject
 
 
 @python_2_unicode_compatible
@@ -43,3 +43,21 @@ class ImageLabel(models.Model):
     
     def __str__(self):
         return "%s - %s" % (self.user.username, self.image.filename)
+    
+    def __init__(self, *args, **kwargs):
+        """
+        To detect when label is added, it is neccesary to store original value
+        """
+        super(ImageLabel, self).__init__(*args, **kwargs)
+        self.__original_label = self.label
+    
+    def save(self, *args, **kwargs):
+        """
+        Override to update completed image counter
+        """
+        super(ImageLabel, self).save(*args, **kwargs)
+        
+        if not self.__original_label and self.label:
+            up = UsersProject.objects.get(user=self.user, project=self.project)
+            up.completed_imgs += 1
+            up.save()
