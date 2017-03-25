@@ -13,13 +13,25 @@
     div.progress-bar {
         min-width: 3em;
     }
+    .popover {
+        max-width: 70%;
+        left: 25%;
+        top: -1em;
+    }
+
+    .list-group-item:hover .popover { display: block; }
+    
+    label {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="col-md-4">
-        <img src="/{{ object.image.filename }}" alt="Image to label">
+        <img class="center-block" src="/{{ object.image.filename }}" alt="Image to label">
     </div>
     <div class="col-md-8">
     <form action="" method="post">
@@ -27,11 +39,16 @@
         <ul class="list-group">
         {% for label in labels %}
             <li class="list-group-item">
+                <div class="popover">
+                    <h3 class="popover-title">{{ label.text }}</h3>
+                    <div class="popover-content">
+                        <p>{{ label.description|safe }}</p>
+                    </div>
+                </div>
                 <label>
                     <input type="radio" name="label" value="{{ label.pk }}">
                     {{ label.text }}
                 </label>
-                <div class="col-md-10 pull-right tip-content">{{ label.description|safe }}</div>
             </li>
         {% endfor %}
         </ul>
