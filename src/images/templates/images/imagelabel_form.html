@@ -5,6 +5,17 @@
 {% block nav-menu %}<li><a href="/p/{{ object.project.slug }}/">{{ object.project.title }}</a></li>
 <li>{% if view.next_unlabeled %}<a href="/p/{{ object.project.slug }}/image/{{ view.next_unlabeled.pk }}/">Image</a>{% else %}<a href="#">No images</a>{% endif %}</li>{% endblock %}
 
+{% block header %}
+<style type="text/css">
+    div.progress {
+        margin: 1em;
+    }
+    div.progress-bar {
+        min-width: 3em;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="col-md-4">
@@ -27,6 +38,11 @@
         <button type="submit" class="btn btn-primary btn">Save and load next</button>&nbsp;&nbsp;&nbsp;
         <a href="/p/{{ object.project.slug }}/image/{{ view.next_unlabeled.pk }}" class="btn btn-default btn" role="button">Skip</a>
     </form>
+    </div>
+</div>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+        {{ progress }}%
     </div>
 </div>
 {% endblock %}

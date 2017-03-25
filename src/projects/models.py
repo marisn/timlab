@@ -18,8 +18,8 @@ class Project(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True,
         help_text="Can contain HTML. Will be placed inside a DIV element.")
-    is_active = models.BooleanField(default=True,
-        help_text="Unset to disable further labeling.")
+    is_active = models.BooleanField(default=False,
+        help_text="Enable project when it is ready for labeling.")
     train_count = models.IntegerField(verbose_name="Training image count",
         help_text="Number of images to show for a single user.")
     created = models.DateTimeField(auto_now_add=True)
@@ -78,3 +78,6 @@ class UsersProject(models.Model):
     
     def __str__(self):
         return "%s - %s" % (self.user.username, self.project.title)
+    
+    def get_complete_percent(self):
+        return round((self.completed_imgs * 100.0) / self.project.train_count, 1)
