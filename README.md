@@ -1,6 +1,6 @@
 # Training IMage LABeler
 
-Timlab provides an easy to use machine learning training image labeling web platform.
+TImLab provides an easy to use machine learning training image labeling web platform.
 It differs from [LabelMe](http://labelme.csail.mit.edu/) by emphasing simplicity
 and limiting labeling to whole picture instead of its parts.
 
