@@ -10,7 +10,7 @@ and limiting labeling to whole picture instead of its parts.
 2. Adjust src/timlab/settings.py to suit your needs. See [Django documentation](https://docs.djangoproject.com/en/1.10/topics/settings/) for details.
 3. cd to src folder
 4. Install Django (if you don't have one): `pip install -r requirements.txt`
-5. Create initial migrations: `./manage.py migrate projects images`
+5. Create initial migrations: `./manage.py makemigrations projects images`
 6. Apply migrations to the DB: `./manage.py migrate`
 7. Create superuser of installation: `./manage.py createsuperuser`
 8. Collect static files for web serving: `./manage.py collectstatic`
